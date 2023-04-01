@@ -79,7 +79,8 @@ const reduser = (state, action) => {
 
 }
 
-function Navbar() {
+function Navbar(props) {
+  const {val,navbar}=props
   const [state, dispatch] = useReducer(reduser, initioalState);
   const [hover, setHover] = useState(false);
   const inter = (e) => {
@@ -98,9 +99,19 @@ function Navbar() {
     base: "none",
     sm: "flex"
   }
+
+  const togbtn=()=>{
+    if(val===false){
+      navbar(true)
+    }else if(val===true){
+      navbar(false)
+    }
+  }
+
   return (
     <>
-      <Box display={dblock}>
+    <Box display={dblock} position={"sticky"} top={"0px"}>
+      <Box display={dblock}  >
         <Flex align="center" h="80px" bg="#0078ad" color="white">
 
           <Flex w="50%" align="center" h={"90%"} >
@@ -108,7 +119,7 @@ function Navbar() {
             <Box w="50px" h="50px" alignItems="center" justifyContent="center" display="flex" borderRadius="50%" marginLeft={"7%"}
               _hover={{ bg: "#141414" }}
             >
-              <HamburgerIcon fontSize="22px" color="white" />
+              <HamburgerIcon fontSize="22px" color="white" onClick={togbtn} />
             </Box>
 
             <Box display={{ base: "none", sm: "flex" }} w="150px" alignItems={"center"} justifyContent="center" h="70%" borderRadius={"20px"} marginLeft="4%"
@@ -152,7 +163,7 @@ function Navbar() {
 
       {/* Dropdown menue */}
 
-      <Box display={dblock}>
+      <Box display={dblock} >
         <Flex bg={"#0c5273"} color="white" h={8} align="center" justify={"center"} gap={"3%"} fontSize={15}>
 
 
@@ -454,6 +465,7 @@ function Navbar() {
           </Box>
         </Flex>
       </Box>
+      </Box>
 
       {/* navbar for mobile */}
       <Box display={{ base: "block", lg: "none" }} position="relative">
@@ -461,7 +473,7 @@ function Navbar() {
           <Box w="40px" h="40px" alignItems="center" justifyContent="center" display="flex" borderRadius="50%" 
             _hover={{ bg: "#141414" }}
           >
-            <HamburgerIcon fontSize={25} color="white" />
+            <HamburgerIcon fontSize={25} color="white" onClick={togbtn} />
           </Box>
 
           <Flex w="200px" align="center" bg="white" borderRadius="20px" paddingLeft="10px" h={9} >
@@ -478,6 +490,8 @@ function Navbar() {
             </Box>
         </Flex>
       </Box>
+
+     
 
     </>
 

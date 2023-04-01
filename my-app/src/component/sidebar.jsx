@@ -7,19 +7,39 @@ import { RiWallet3Fill,RiCoupon3Fill } from 'react-icons/ri';
 import { MdLocalOffer,MdPhoneCallback,MdNotificationImportant } from 'react-icons/md';
 import { FaQuestionCircle,FaUsers,FaMapMarked } from 'react-icons/fa';
 import Signbtn from './signinBtn'
+import { useState } from "react";
 
 
 
-const Sidebar = () => {
+const Sidebar = (props) => {
+    const {val,navbar}=props
+    const togbtn=()=>{
+        if(val===false){
+          navbar(true)
+        }else if(val===true){
+          navbar(false)
+        }
+      }
+    
     return (
         <>
+        {/* display: block;
+        height: 100%;
+        position: fixed;
+        z-index: 100;
+        left: 0px;
+        top: 0;
+        width: 100%;
+        background-color: white;
+        transform: translateX(-100%);
+        transition: transform 250ms ease-in-out; */}
             
-            <Box w={{ base: "100%", lg: "30%" }} border="1px solid red"  >
+            <Box w={{ base: "100%", lg: "30%" }}  position={"fixed"} top={0} left={0} transform={ val?{base:"translateX(-100%)",lg:"-30%"}:{base:"translateX(0%)", lg:"0%"}}  transition=" transform 250ms ease-in-out" >
 
-                <Flex bg="#0078ad" h={{ base: "70px", lg: "80px" }} width="100%" align="center" justify="center" gap={"50%"} >
+                <Flex bg="#0078ad" h={{ base: "70px", lg: "80px" }} width="100%" align="center" justify="center" gap={"50%"} position="absolute" top="0px" >
 
                     <Flex align={"center"} justify="center" color={"white"}  >
-                        <AiOutlineLeft fontSize={"20px"}  />
+                        <AiOutlineLeft fontSize={"20px"} onClick={togbtn} />
                         <Text>Hello!</Text>
                     </Flex>
 
@@ -27,7 +47,7 @@ const Sidebar = () => {
 
                 </Flex>
 
-                <List spacing={3} border="1px solid green" >
+                <List spacing={3}  bg={"white"} >
                     <ListItem borderBottom="1px solid" m={"20px"} p="8px" >
                         
                         <ListIcon as={AiFillHome}  color='#0078ad' fontSize={25}  />
