@@ -5,9 +5,10 @@ import { HamburgerIcon } from '@chakra-ui/icons'
 import { MdLocationPin } from 'react-icons/md';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { FaShoppingCart, FaUserAlt } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink, Navigate } from 'react-router-dom';
 import { useReducer, useState } from 'react';
 import Signbtn from './signinBtn'
+import { useNavigate } from "react-router-dom";
 
 
 const initioalState = {
@@ -80,6 +81,7 @@ const reduser = (state, action) => {
 }
 
 function Navbar(props) {
+  const navigate = useNavigate();
   const {val,navbar}=props
   const [state, dispatch] = useReducer(reduser, initioalState);
   const [hover, setHover] = useState(false);
@@ -107,10 +109,12 @@ function Navbar(props) {
       navbar(false)
     }
   }
-
+const naviga=()=>{
+ navigate("/")
+}
   return (
     <>
-    <Box display={dblock} position={"sticky"} top={"0px"}>
+    <Box display={dblock} position={"sticky"} top={"0px"} zIndex={"300000"}>
       <Box display={dblock}  >
         <Flex align="center" h="80px" bg="#0078ad" color="white">
 
@@ -124,7 +128,7 @@ function Navbar(props) {
 
             <Box display={{ base: "none", sm: "flex" }} w="150px" alignItems={"center"} justifyContent="center" h="70%" borderRadius={"20px"} marginLeft="4%"
               _hover={{ bg: "#141414" }}  >
-              <Image w="80%" src="https://lh6.googleusercontent.com/psu-EgWu8Zxpx57ZosGZmc71301f72dvCho6LIMwq9ETpZhFLcTvvX7rZmuOu-L86co=w2400" />
+              <Image onClick={naviga} w="80%" src="https://lh6.googleusercontent.com/psu-EgWu8Zxpx57ZosGZmc71301f72dvCho6LIMwq9ETpZhFLcTvvX7rZmuOu-L86co=w2400" />
             </Box>
 
             <Flex align="center" marginLeft={"6%"} justify="center" borderRadius="10px" w={"35%"} h={"35%"}
@@ -150,7 +154,8 @@ function Navbar(props) {
 
             <Box w="50px" h="50px" alignItems="center" justifyContent="center" display="flex" borderRadius="50%" marginLeft={"1%"}
               _hover={{ bg: "#141414" }}>
-              <FaShoppingCart fontSize="22px" color="white" />
+                <Link to="/cartpage"><FaShoppingCart fontSize="22px" color="white" /></Link>
+              
             </Box>
 
             {/* signinbutton */}
@@ -170,7 +175,7 @@ function Navbar(props) {
           <Box onMouseEnter={() => dispatch({ type: "hover1", payload: true })}
             onMouseLeave={() => dispatch({ type: "hover1", payload: false })}
           >
-            <NavLink>Groceries</NavLink>
+            <NavLink to="/productpage" >Groceries</NavLink>
             <Box mt={"4px"} borderBottomRightRadius={"10px"} borderBottomLeftRadius={"10px"} overflowY="auto"
               css={{
                 '&::-webkit-scrollbar': {
